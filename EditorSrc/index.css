@@ -1219,7 +1219,9 @@ i.page-break,
 .emoji.heart {
   background-image: url(images/emoji/2764.png);
 } */
-
+.Toastify__toast-container {
+  z-index: 999999;
+}
 .keyword {
   color: rgb(241, 118, 94);
   font-weight: bold;

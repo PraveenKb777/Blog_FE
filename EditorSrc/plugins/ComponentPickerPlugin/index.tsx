@@ -38,6 +38,7 @@ import InsertLayoutDialog from "../LayoutPlugin/InsertLayoutDialog";
 import { INSERT_PAGE_BREAK } from "../PageBreakPlugin";
 import { InsertPollDialog } from "../PollPlugin";
 import { InsertTableDialog } from "../TablePlugin";
+import ToastAll from "../../../GlobalErrorToast";
 
 class ComponentPickerOption extends MenuOption {
   // What shows up in the editor
@@ -277,7 +278,9 @@ function getBaseOptions(editor: LexicalEditor, showModal: ShowModal) {
       keywords: ["image", "photo", "picture", "file"],
       onSelect: () =>
         showModal("Insert Image", (onClose) => (
-          <InsertImageDialog activeEditor={editor} onClose={onClose} />
+          <>
+            <InsertImageDialog activeEditor={editor} onClose={onClose} />
+          </>
         )),
     }),
     new ComponentPickerOption("Collapsible", {

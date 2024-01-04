@@ -42,6 +42,7 @@ import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import Placeholder from "../ui/Placeholder";
 import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
+import React from "react";
 
 const imageCache = new Set();
 
@@ -79,17 +80,10 @@ function LazyImage({
   useSuspenseImage(src);
   return (
     <img
-      className={className || undefined}
+      className={`${className || undefined} image-default`}
       src={src}
       alt={altText}
       ref={imageRef}
-      style={{
-        margin: "20px",
-        height: "30vh",
-        maxWidth: "100%",
-        width: "80vw",
-        objectFit: "contain",
-      }}
       draggable="false"
     />
   );

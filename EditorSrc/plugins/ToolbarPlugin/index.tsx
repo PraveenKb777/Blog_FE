@@ -15,6 +15,7 @@ import {
   REMOVE_LIST_COMMAND,
 } from "@lexical/list";
 import { INSERT_EMBED_COMMAND } from "@lexical/react/LexicalAutoEmbedPlugin";
+import { $generateHtmlFromNodes } from "@lexical/html";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { $isDecoratorBlockNode } from "@lexical/react/LexicalDecoratorBlockNode";
 import { INSERT_HORIZONTAL_RULE_COMMAND } from "@lexical/react/LexicalHorizontalRuleNode";
@@ -74,6 +75,7 @@ import { sanitizeUrl } from "../../utils/url";
 import { EmbedConfigs } from "../AutoEmbedPlugin";
 import { InsertImageDialog } from "../ImagesPlugin";
 import { InsertInlineImageDialog } from "../InlineImagePlugin";
+import React from "react";
 
 const blockTypeToBlockName = {
   bullet: "Bulleted List",
@@ -792,6 +794,14 @@ export default function ToolbarPlugin({
     },
     [applyStyleText]
   );
+  const onClickPublish = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    event.preventDefault();
+    editor.update(() => {
+      console.log($generateHtmlFromNodes(editor));
+    });
+  };
 
   const insertLink = useCallback(() => {
     if (!isLink) {
@@ -1239,8 +1249,8 @@ export default function ToolbarPlugin({
         isRTL={isRTL}
       /> */}
       <button
-        onClick={() => {
-          activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, "underline");
+        onClick={(e) => {
+          onClickPublish(e);
         }}
         className={"toolbar-item spaced "}
         title={"Publish the Blog"}

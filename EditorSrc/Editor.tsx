@@ -47,6 +47,7 @@ import YouTubePlugin from "./plugins/YouTubePlugin";
 import ContentEditable from "./ui/ContentEditable";
 import Placeholder from "./ui/Placeholder";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import React from "react";
 
 export default function Editor(): JSX.Element {
   const { historyState } = useSharedHistoryContext();
@@ -127,10 +128,10 @@ export default function Editor(): JSX.Element {
         <AutoFocusPlugin />
         <ClearEditorPlugin />
         <ComponentPickerPlugin />
-        <EmojiPickerPlugin />
+        {/* <EmojiPickerPlugin /> */}
         <AutoEmbedPlugin />
 
-        <MentionsPlugin />
+        {/* <MentionsPlugin /> */}
         <EmojisPlugin />
         <HashtagPlugin />
         <KeywordsPlugin />
