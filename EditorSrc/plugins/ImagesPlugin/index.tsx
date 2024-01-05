@@ -34,6 +34,8 @@ import Button from "../../ui/Button";
 import { DialogActions, DialogButtonsList } from "../../ui/Dialog";
 import FileInput from "../../ui/FileInput";
 import TextInput from "../../ui/TextInput";
+import ENV from "../../../src/utils/env";
+import axios from "axios";
 
 export type InsertImagePayload = Readonly<ImagePayload>;
 
@@ -89,19 +91,40 @@ export function InsertImageUploadedDialogBody({
 }) {
   const [src, setSrc] = useState("");
   const [altText, setAltText] = useState("");
+  const [uploading, setUploading] = useState(false);
 
   const isDisabled = src === "";
 
-  const loadImage = (files: FileList | null) => {
-    const reader = new FileReader();
-    reader.onload = function () {
-      if (typeof reader.result === "string") {
-        setSrc(reader.result);
-      }
-      return "";
-    };
+  const loadImage = async (files: FileList | null) => {
+    // const reader = new FileReader();
+    // reader.onload = function () {
+    //   if (typeof reader.result === "string") {
+    //     setSrc(reader.result);
+    //   }
+    //   return "";
+    // };
+    // console.log(files);
     if (files !== null) {
-      reader.readAsDataURL(files[0]);
+      // reader.readAsDataURL(files[0]);
+      setUploading(true);
+      const formData = new FormData();
+      formData.append("image", files[0]);
+      try {
+        const response = await axios.post<{ message: string; url: string }>(
+          `${ENV.baseUrl}/image`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+        const data = await response.data;
+        setSrc(data.url);
+        setUploading(false);
+      } catch (error) {
+        console.log("image upload error", error);
+      }
     }
   };
 
@@ -126,7 +149,7 @@ export function InsertImageUploadedDialogBody({
           disabled={isDisabled}
           onClick={() => onClick({ altText, src })}
         >
-          Confirm
+          {uploading ? <span className="loader"></span> : "Confirm"}
         </Button>
       </DialogActions>
     </>

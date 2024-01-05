@@ -27,6 +27,7 @@ export interface ImagePayload {
   src: string;
   width?: number;
   captionsEnabled?: boolean;
+  className?: string;
 }
 
 function convertImageElement(domNode: Node): null | DOMConversionOutput {
@@ -47,6 +48,7 @@ export type SerializedImageNode = Spread<
     showCaption: boolean;
     src: string;
     width?: number;
+    className?: string;
   },
   SerializedLexicalNode
 >;
@@ -61,6 +63,7 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
   __caption: LexicalEditor;
   // Captions cannot yet be used within editor cells
   __captionsEnabled: boolean;
+  __className: string = "PlaygroundEditorTheme__embedBlock";
 
   static getType(): string {
     return "image";
@@ -76,13 +79,22 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
       node.__showCaption,
       node.__caption,
       node.__captionsEnabled,
-      node.__key
+      node.__key,
+      node.__className
     );
   }
 
   static importJSON(serializedNode: SerializedImageNode): ImageNode {
-    const { altText, height, width, maxWidth, caption, src, showCaption } =
-      serializedNode;
+    const {
+      altText,
+      height,
+      width,
+      maxWidth,
+      caption,
+      src,
+      showCaption,
+      className,
+    } = serializedNode;
     const node = $createImageNode({
       altText,
       height,
@@ -90,6 +102,7 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
       showCaption,
       src,
       width,
+      className,
     });
     const nestedEditor = node.__caption;
     const editorState = nestedEditor.parseEditorState(caption.editorState);
@@ -105,6 +118,7 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
     element.setAttribute("alt", this.__altText);
     element.setAttribute("width", this.__width.toString());
     element.setAttribute("height", this.__height.toString());
+    element.setAttribute("class", this.__className.toString());
     return { element };
   }
 
@@ -126,7 +140,8 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
     showCaption?: boolean,
     caption?: LexicalEditor,
     captionsEnabled?: boolean,
-    key?: NodeKey
+    key?: NodeKey,
+    className: string = "PlaygroundEditorTheme__embedBlock"
   ) {
     super(key);
     this.__src = src;
@@ -137,6 +152,7 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
     this.__showCaption = showCaption || false;
     this.__caption = caption || createEditor();
     this.__captionsEnabled = captionsEnabled || captionsEnabled === undefined;
+    this.__className = className || "PlaygroundEditorTheme__embedBlock";
   }
 
   exportJSON(): SerializedImageNode {
@@ -146,6 +162,7 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
       height: this.__height === "inherit" ? 0 : this.__height,
       maxWidth: this.__maxWidth,
       showCaption: this.__showCaption,
+      className: this.__className,
       src: this.getSrc(),
       type: "image",
       version: 1,
@@ -205,6 +222,7 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
           caption={this.__caption}
           captionsEnabled={this.__captionsEnabled}
           resizable={true}
+          className="PlaygroundEditorTheme__embedBlock"
         />
       </Suspense>
     );
@@ -221,6 +239,7 @@ export function $createImageNode({
   showCaption,
   caption,
   key,
+  className = "PlaygroundEditorTheme__embedBlock",
 }: ImagePayload): ImageNode {
   return $applyNodeReplacement(
     new ImageNode(
@@ -232,7 +251,8 @@ export function $createImageNode({
       showCaption,
       caption,
       captionsEnabled,
-      key
+      key,
+      className
     )
   );
 }

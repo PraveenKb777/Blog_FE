@@ -5,7 +5,7 @@ import { $getNearestNodeFromDOMNode, LexicalEditor } from "lexical";
 import { Options } from "prettier";
 import * as React from "react";
 import { useState } from "react";
-
+import pluginEslinktree from "prettier/plugins/estree";
 interface Props {
   lang: string;
   editor: LexicalEditor;
@@ -73,7 +73,10 @@ export function PrettierButton({ lang, editor, getCodeDOMNode }: Props) {
     try {
       const format = await loadPrettierFormat();
       const options = getPrettierOptions(lang);
-      options.plugins = [await loadPrettierParserByLang(lang)];
+      options.plugins = [
+        await loadPrettierParserByLang(lang),
+        pluginEslinktree,
+      ];
 
       if (!codeDOMNode) {
         return;
@@ -88,7 +91,9 @@ export function PrettierButton({ lang, editor, getCodeDOMNode }: Props) {
           let parsed = "";
 
           try {
-            parsed = format(content, options);
+            format(content, options).then((e) => {
+              parsed = e;
+            });
           } catch (error: unknown) {
             setError(error);
           }

@@ -8,14 +8,7 @@ import { HorizontalRulePlugin } from "@lexical/react/LexicalHorizontalRulePlugin
 import { ListPlugin } from "@lexical/react/LexicalListPlugin";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { TabIndentationPlugin } from "@lexical/react/LexicalTabIndentationPlugin";
-import {
-  ChangeEvent,
-  ChangeEventHandler,
-  KeyboardEvent,
-  useEffect,
-  useState,
-} from "react";
-import { CAN_USE_DOM } from "./shared/src/canUseDOM";
+import { ChangeEvent, KeyboardEvent, useEffect, useState } from "react";
 import { useSharedHistoryContext } from "./context/SharedHistoryContext";
 import AutoEmbedPlugin from "./plugins/AutoEmbedPlugin";
 import AutoLinkPlugin from "./plugins/AutoLinkPlugin";
@@ -24,7 +17,6 @@ import CodeHighlightPlugin from "./plugins/CodeHighlightPlugin";
 import ComponentPickerPlugin from "./plugins/ComponentPickerPlugin";
 import DragDropPaste from "./plugins/DragDropPastePlugin";
 import DraggableBlockPlugin from "./plugins/DraggableBlockPlugin";
-import EmojiPickerPlugin from "./plugins/EmojiPickerPlugin";
 import EmojisPlugin from "./plugins/EmojisPlugin";
 import FigmaPlugin from "./plugins/FigmaPlugin";
 import FloatingLinkEditorPlugin from "./plugins/FloatingLinkEditorPlugin";
@@ -35,23 +27,28 @@ import KeywordsPlugin from "./plugins/KeywordsPlugin";
 import LinkPlugin from "./plugins/LinkPlugin";
 import ListMaxIndentLevelPlugin from "./plugins/ListMaxIndentLevelPlugin";
 import { MaxLengthPlugin } from "./plugins/MaxLengthPlugin";
-import MentionsPlugin from "./plugins/MentionsPlugin";
 import PollPlugin from "./plugins/PollPlugin";
 import SpeechToTextPlugin from "./plugins/SpeechToTextPlugin";
 import TabFocusPlugin from "./plugins/TabFocusPlugin";
+import { CAN_USE_DOM } from "./shared/src/canUseDOM";
 // import TableCellActionMenuPlugin from "./plugins/TableActionMenuPlugin";
 // import TableCellResizer from "./plugins/TableCellResizer";
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import React from "react";
 import ToolbarPlugin from "./plugins/ToolbarPlugin";
 import TwitterPlugin from "./plugins/TwitterPlugin";
 import YouTubePlugin from "./plugins/YouTubePlugin";
 import ContentEditable from "./ui/ContentEditable";
-import Placeholder from "./ui/Placeholder";
-import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
-import React from "react";
+
+import { useDispatch, useSelector } from "react-redux";
+import { setTitle } from "../src/redux/slice/publishSlice";
+import { RootState } from "../src/redux/store/store";
+import AutocompletePlugin from "./plugins/AutocompletePlugin";
 
 export default function Editor(): JSX.Element {
+  const dispatch = useDispatch();
+
   const { historyState } = useSharedHistoryContext();
-  const text = "Enter Some thing....";
   const placeholder = null;
   // <Placeholder>{text}</Placeholder>;
   const [floatingAnchorElem, setFloatingAnchorElem] =
@@ -87,9 +84,7 @@ export default function Editor(): JSX.Element {
     const [editor] = useLexicalComposerContext();
     const onChangeTitleInput = (e: ChangeEvent<HTMLInputElement>): void => {
       e.preventDefault();
-      if (e.target.value === "") {
-        null;
-      }
+      dispatch(setTitle(e.target.value));
     };
 
     const onKeyTitleDown = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -107,10 +102,13 @@ export default function Editor(): JSX.Element {
         }
       }
     };
+    const { title } = useSelector((state: RootState) => state.publishReducer);
+    console.log(title);
     return (
       <input
         type="text"
         placeholder="Title"
+        value={title}
         className="title_input PlaygroundEditorTheme__h1"
         onChange={onChangeTitleInput}
         onKeyDown={onKeyTitleDown}
@@ -166,7 +164,7 @@ export default function Editor(): JSX.Element {
         <ImagesPlugin />
         <InlineImagePlugin />
         <LinkPlugin />
-        <PollPlugin />
+        {/* <PollPlugin /> */}
         <TwitterPlugin />
         <YouTubePlugin />
         <FigmaPlugin />
@@ -177,7 +175,7 @@ export default function Editor(): JSX.Element {
         {floatingAnchorElem && !isSmallWidthViewport && (
           <>
             <DraggableBlockPlugin anchorElem={floatingAnchorElem} />
-            <CodeActionMenuPlugin anchorElem={floatingAnchorElem} />
+            {/* <CodeActionMenuPlugin anchorElem={floatingAnchorElem} /> */}
             <FloatingLinkEditorPlugin
               anchorElem={floatingAnchorElem}
               isLinkEditMode={isLinkEditMode}

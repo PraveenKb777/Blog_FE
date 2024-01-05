@@ -5,6 +5,7 @@ import {
   CODE_LANGUAGE_MAP,
   getLanguageFriendlyName,
 } from "@lexical/code";
+import { $generateNodesFromDOM } from "@lexical/html";
 import { $isLinkNode, TOGGLE_LINK_COMMAND } from "@lexical/link";
 import {
   $isListNode,
@@ -43,7 +44,9 @@ import {
   $INTERNAL_isPointSelection,
   $createParagraphNode,
   $getNodeByKey,
+  $getRoot,
   $getSelection,
+  $insertNodes,
   $isElementNode,
   $isRangeSelection,
   $isRootOrShadowRoot,
@@ -76,6 +79,10 @@ import { EmbedConfigs } from "../AutoEmbedPlugin";
 import { InsertImageDialog } from "../ImagesPlugin";
 import { InsertInlineImageDialog } from "../InlineImagePlugin";
 import React from "react";
+import axios from "axios";
+import { publishAction } from "../../../src/redux/slice/publishSlice";
+import { useDispatch } from "react-redux";
+import { AsyncThunk } from "@reduxjs/toolkit";
 
 const blockTypeToBlockName = {
   bullet: "Bulleted List",
@@ -527,6 +534,8 @@ export default function ToolbarPlugin({
   const [selectedElementKey, setSelectedElementKey] = useState<NodeKey | null>(
     null
   );
+
+  const dispatch = useDispatch();
   const [fontSize, setFontSize] = useState<string>("15px");
   const [fontColor, setFontColor] = useState<string>("#000");
   const [bgColor, setBgColor] = useState<string>("#fff");
@@ -794,13 +803,23 @@ export default function ToolbarPlugin({
     },
     [applyStyleText]
   );
-  const onClickPublish = (
+  const onClickPublish = async (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     event.preventDefault();
+    let content: any | undefined;
     editor.update(() => {
-      console.log($generateHtmlFromNodes(editor));
+      // content = JSON.stringify(editor.getEditorState().toJSON());
+      content = $generateHtmlFromNodes(editor);
+      // const parser = new DOMParser();
+      // const dom = parser.parseFromString(content, "text/html");
+
+      // // Once you have the DOM instance it's easy to generate LexicalNodes.
+      // const nodes = $generateNodesFromDOM(editor, dom);
+      // $getRoot().select();
+      // $insertNodes(nodes);
     });
+    dispatch(publishAction({ content: content }));
   };
 
   const insertLink = useCallback(() => {

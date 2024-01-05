@@ -80,7 +80,7 @@ function LazyImage({
   useSuspenseImage(src);
   return (
     <img
-      className={`${className || undefined} image-default`}
+      className={`${className || "PlaygroundEditorTheme__embedBlock"}`}
       src={src}
       alt={altText}
       ref={imageRef}
@@ -98,6 +98,7 @@ export default function ImageComponent({
   maxWidth,
   showCaption,
   caption,
+  className,
 }: {
   altText: string;
   caption: LexicalEditor;
@@ -109,6 +110,7 @@ export default function ImageComponent({
   src: string;
   width: "inherit" | number;
   captionsEnabled: boolean;
+  className: string;
 }): JSX.Element {
   const imageRef = useRef<null | HTMLImageElement>(null);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
@@ -344,7 +346,9 @@ export default function ImageComponent({
           <LazyImage
             className={
               isFocused
-                ? `focused ${$isNodeSelection(selection) ? "draggable" : ""}`
+                ? `focused ${
+                    $isNodeSelection(selection) ? "draggable" : ""
+                  } ${className}`
                 : null
             }
             src={src}
