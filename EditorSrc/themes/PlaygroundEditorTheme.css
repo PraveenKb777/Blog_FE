@@ -19,8 +19,8 @@
 .PlaygroundEditorTheme__paragraph img,
 .PlaygroundEditorTheme__embedBlock {
   max-width: 100%;
-  width: 96%;
-  object-fit: cover;
+  width: 100%;
+  object-fit: fill;
 }
 iframe {
   width: 100%;
