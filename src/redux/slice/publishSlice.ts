@@ -17,19 +17,21 @@ const initialState: IPublishState = {
 
 interface IPublishPayload {
   content?: string;
+  sendThepage: (id: string) => void;
 }
 
 export const publishAction = createAsyncThunk(
   "post/publish",
   async (payload: IPublishPayload, { dispatch, getState }) => {
     try {
-      const { publishReducer } = getState() as RootState;
+      const { publishReducer, editorReducer } = getState() as RootState;
       const res = await axiosInstance.post("/blogs", {
         content: payload.content?.toString(),
         title: publishReducer.title,
+        images: editorReducer.imageList,
       });
       const data = await res.data;
-
+      payload.sendThepage(data.data.id);
       console.log(data);
     } catch (error) {
       dispatch(setError(error.response.data.message));

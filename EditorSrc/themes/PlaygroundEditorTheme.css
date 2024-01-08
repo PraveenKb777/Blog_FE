@@ -18,11 +18,16 @@
 }
 .PlaygroundEditorTheme__paragraph img,
 .PlaygroundEditorTheme__embedBlock {
-  margin: 20px;
-  height: 30vh;
   max-width: 100%;
-  width: 80vw;
-  object-fit: contain;
+  width: 96%;
+  object-fit: cover;
+}
+iframe {
+  width: 100%;
+}
+.PlaygroundEditorTheme__paragraph .editor-image,
+.PlaygroundEditorTheme__paragraph .editor-image div {
+  width: 100%;
 }
 .PlaygroundEditorTheme__quote {
   margin: 0;

@@ -1,5 +1,5 @@
 const ENV = {
-  baseUrl: "http://localhost:3000",
+  baseUrl: "http://192.168.1.26:3000",
 };
 
 export default ENV;

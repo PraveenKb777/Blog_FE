@@ -36,6 +36,8 @@ import FileInput from "../../ui/FileInput";
 import TextInput from "../../ui/TextInput";
 import ENV from "../../../src/utils/env";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { setImageList } from "../../../src/redux/slice/editorSlice";
 
 export type InsertImagePayload = Readonly<ImagePayload>;
 
@@ -52,7 +54,7 @@ export function InsertImageUriDialogBody({
 }) {
   const [src, setSrc] = useState("");
   const [altText, setAltText] = useState("");
-
+  const dispatch = useDispatch();
   const isDisabled = src === "";
 
   return (
@@ -60,7 +62,10 @@ export function InsertImageUriDialogBody({
       <TextInput
         label="Image URL"
         placeholder="i.e. https://source.unsplash.com/random"
-        onChange={setSrc}
+        onChange={(e) => {
+          setSrc(e);
+          dispatch(setImageList(e));
+        }}
         value={src}
         data-test-id="image-modal-url-input"
       />
@@ -92,6 +97,7 @@ export function InsertImageUploadedDialogBody({
   const [src, setSrc] = useState("");
   const [altText, setAltText] = useState("");
   const [uploading, setUploading] = useState(false);
+  const dispatch = useDispatch();
 
   const isDisabled = src === "";
 
@@ -121,6 +127,7 @@ export function InsertImageUploadedDialogBody({
         );
         const data = await response.data;
         setSrc(data.url);
+        dispatch(setImageList(data.url));
         setUploading(false);
       } catch (error) {
         console.log("image upload error", error);

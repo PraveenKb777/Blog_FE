@@ -100,23 +100,25 @@ function MainEditor(): JSX.Element {
   };
 
   return (
-    <LexicalComposer initialConfig={initialConfig}>
-      <SharedHistoryContext>
-        <TableContext>
-          <SharedAutocompleteContext>
-            <div className="editor-shell">
-              <Editor />
-            </div>
-            {/* <Settings />
+    <div id="editorRoot">
+      <LexicalComposer initialConfig={initialConfig}>
+        <SharedHistoryContext>
+          <TableContext>
+            <SharedAutocompleteContext>
+              <div className="editor-shell">
+                <Editor />
+              </div>
+              {/* <Settings />
             {isDevPlayground ? <DocsPlugin /> : null}
             {isDevPlayground ? <PasteLogPlugin /> : null}
             {isDevPlayground ? <TestRecorderPlugin /> : null} */}
 
-            {/* <TypingPerfPlugin /> */}
-          </SharedAutocompleteContext>
-        </TableContext>
-      </SharedHistoryContext>
-    </LexicalComposer>
+              {/* <TypingPerfPlugin /> */}
+            </SharedAutocompleteContext>
+          </TableContext>
+        </SharedHistoryContext>
+      </LexicalComposer>
+    </div>
   );
 }
 

@@ -1,5 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+export interface IToastError {
+  errorMsg: string;
+}
+
 const initialState = {
   errorMsg: "",
 };

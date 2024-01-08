@@ -83,6 +83,7 @@ import axios from "axios";
 import { publishAction } from "../../../src/redux/slice/publishSlice";
 import { useDispatch } from "react-redux";
 import { AsyncThunk } from "@reduxjs/toolkit";
+import { useNavigate } from "react-router-dom";
 
 const blockTypeToBlockName = {
   bullet: "Bulleted List",
@@ -803,6 +804,16 @@ export default function ToolbarPlugin({
     },
     [applyStyleText]
   );
+
+  const navigate = useNavigate();
+
+  const sendThepage = (id) => {
+    navigate(`/blogs/${id}`, {
+      replace: true,
+    });
+    navigate(0);
+  };
+
   const onClickPublish = async (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
@@ -819,7 +830,7 @@ export default function ToolbarPlugin({
       // $getRoot().select();
       // $insertNodes(nodes);
     });
-    dispatch(publishAction({ content: content }));
+    dispatch(publishAction({ content: content, sendThepage }));
   };
 
   const insertLink = useCallback(() => {
