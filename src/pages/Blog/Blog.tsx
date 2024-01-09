@@ -9,6 +9,7 @@ interface IBlog {
   _id: string;
   title: string;
   content: string;
+  readtime: number;
   author: {
     _id: string;
     firstname: string;
@@ -54,7 +55,8 @@ export default function Blog() {
               {blog?.author.lastname}
             </p>
             <p className="view_blog_created_at">
-              {moment(blog?.createdAt).format("MMM D, YYYY")}
+              {moment(blog?.createdAt).format("MMM D, YYYY")} * Estimated read
+              time: {blog?.readtime} minutes
             </p>
           </div>
         </div>

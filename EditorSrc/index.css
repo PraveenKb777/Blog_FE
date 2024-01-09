@@ -17,8 +17,8 @@
 .title_input {
   outline: none;
   border: 0;
-  width: 100%;
   margin-left: 25px !important;
+  width: 100%;
 }
 .title_input::placeholder {
   color: #0002;

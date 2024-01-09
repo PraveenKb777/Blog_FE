@@ -82,12 +82,12 @@ export default function Editor(): JSX.Element {
 
   const TitlePlugin = () => {
     const [editor] = useLexicalComposerContext();
-    const onChangeTitleInput = (e: ChangeEvent<HTMLInputElement>): void => {
+    const onChangeTitleInput = (e: ChangeEvent<HTMLTextAreaElement>): void => {
       e.preventDefault();
       dispatch(setTitle(e.target.value));
     };
 
-    const onKeyTitleDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    const onKeyTitleDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
       if (e.key === "Enter") {
         const activeElement = document.activeElement;
         const rootElement = editor.getRootElement();
@@ -105,8 +105,7 @@ export default function Editor(): JSX.Element {
     const { title } = useSelector((state: RootState) => state.publishReducer);
     console.log(title);
     return (
-      <input
-        type="text"
+      <textarea
         placeholder="Title"
         value={title}
         className="title_input PlaygroundEditorTheme__h1"
