@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import MainEditor from "./EditorSrc/MainEditor";
+import PrivateRoute from "./src/components/PrivateRoute";
+import Blog from "./src/pages/Blog/Blog";
+import Home from "./src/pages/Home/Home";
 import Login from "./src/pages/Login/Login";
 import { setError } from "./src/redux/slice/errorSlice";
 import { RootState } from "./src/redux/store/store";
-import PrivateRoute from "./src/components/PrivateRoute";
-import Home from "./src/pages/Home/Home";
-import Blog from "./src/pages/Blog/Blog";
 export default function App(): JSX.Element {
   const { errorMsg } = useSelector((e: RootState) => e.errorReducer);
   const dispatch = useDispatch();

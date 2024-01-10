@@ -1,0 +1,102 @@
+.send_button {
+  font-family: inherit;
+  font-size: 18px;
+  background: linear-gradient(to bottom, #4dc7d9 0%, #66a6ff 100%);
+  color: white;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 25px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.send_button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+}
+
+.send_button:active {
+  transform: scale(0.95);
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.send_button span {
+  display: block;
+  margin-left: 0.4em;
+  transition: all 0.3s;
+}
+
+.send_button svg {
+  width: 18px;
+  height: 18px;
+  fill: white;
+  transition: all 0.3s;
+}
+
+.send_button .send_button_svg-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.2);
+  margin-right: 0.5em;
+  transition: all 0.3s;
+}
+
+.send_button:hover .send_button_svg-wrapper {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.send_button:hover svg {
+  transform: rotate(45deg);
+}
+
+/* loader */
+
+.send_button_loader {
+  width: 22px;
+  margin-right: 10px;
+  height: 22px;
+  color: #fff;
+  position: relative;
+  background: radial-gradient(5.5px, currentColor 94%, #0000);
+}
+
+.send_button_loader:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background:
+    radial-gradient(5px at bottom right, #0000 94%, currentColor) top left,
+    radial-gradient(5px at bottom left, #0000 94%, currentColor) top right,
+    radial-gradient(5px at top right, #0000 94%, currentColor) bottom left,
+    radial-gradient(5px at top left, #0000 94%, currentColor) bottom right;
+  background-size: 11px 11px;
+  background-repeat: no-repeat;
+  animation: send_button_loader 1.5s infinite cubic-bezier(0.3, 1, 0, 1);
+}
+
+@keyframes send_button_loader {
+  33% {
+    inset: -6px;
+    transform: rotate(0deg);
+  }
+
+  66% {
+    inset: -6px;
+    transform: rotate(90deg);
+  }
+
+  100% {
+    inset: 0;
+    transform: rotate(90deg);
+  }
+}

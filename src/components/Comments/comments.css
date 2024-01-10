@@ -1,0 +1,65 @@
+.comments-main-cont {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.comments_comment {
+  margin-bottom: 10px;
+  text-align: justify;
+}
+
+.comments_reply_btn {
+  align-self: flex-end;
+  margin-bottom: 20px;
+}
+.comment_reply_textarea {
+  width: 100%;
+  border-radius: 10px;
+  background: #ffffff;
+  outline: none;
+  resize: none;
+  min-height: 20px;
+  padding: 20px;
+  font-size: 16px;
+  max-height: 200px;
+  margin-bottom: 20px;
+  border: 0;
+  transition: all 0.5s;
+  box-shadow:
+    -11px 11px 22px #e8e8e8,
+    11px -11px 22px #ffffff;
+}
+
+.isReplyNot {
+  display: none;
+}
+.comment_btns {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.total-replies {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.comments_user_details_delete {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.comments_user_details_delete > p {
+  color: red;
+  font-size: medium;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.comments_user_details_delete > p:hover {
+  color: darkred;
+}

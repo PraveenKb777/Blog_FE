@@ -43,12 +43,13 @@ export default function Login() {
         username: email,
         password,
       });
-      console.log("fff");
       const { data } = await res.data;
       const token = data?.token || "";
       localStorage.setItem("jwt", token);
       if (state?.redirect) {
         navigate(state.redirect, { replace: true });
+      } else {
+        navigate("/", { replace: true });
       }
     } catch (error) {
       dispatch(setError(error.response.data.message));
