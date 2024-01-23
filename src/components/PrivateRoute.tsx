@@ -9,7 +9,7 @@ import {
 import React from "react";
 import axiosInstance from "../utils/auth";
 import { useDispatch } from "react-redux";
-import { setCurrentUser } from "../redux/slice/initialSlice";
+import { setCurrentUser, setLogin } from "../redux/slice/initialSlice";
 
 export default function PrivateRoute(props: RouteProps): React.ReactNode {
   const navigate = useNavigate();
@@ -23,6 +23,7 @@ export default function PrivateRoute(props: RouteProps): React.ReactNode {
       const data = await res.data;
 
       dispatch(setCurrentUser(data.data.user));
+      dispatch(setLogin(true));
     } catch (error) {
       console.warn("Not Logged in");
       throw Error(error);

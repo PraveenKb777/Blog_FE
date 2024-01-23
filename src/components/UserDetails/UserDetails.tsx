@@ -33,11 +33,13 @@ export default function UserDetails(props: IUserDetails) {
           {props?.author?.firstname}
           {props?.author?.lastname}
         </p>
-        <p className="view_blog_created_at">
-          {moment(props?.createdAt).format("MMM D, YYYY")}
-          {props.readtime &&
-            ` * Estimated read time: ${props?.readtime} minutes`}
-        </p>
+        {props.createdAt && (
+          <p className="view_blog_created_at">
+            {moment(props?.createdAt).format("MMM D, YYYY")}
+            {props.readtime &&
+              ` * Estimated read time: ${props?.readtime} minutes`}
+          </p>
+        )}
       </div>
     </div>
   );

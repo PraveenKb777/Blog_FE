@@ -1,0 +1,109 @@
+.header_main_cont {
+  background: rgba(255, 255, 255, 0.13);
+  border-bottom: 1px solid black;
+  backdrop-filter: blur(2.2px);
+  -webkit-backdrop-filter: blur(4.2px);
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999998;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.header_main_sub_cont {
+  max-width: 1024px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header_brand_logo {
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+  font-size: 24px;
+  cursor: pointer;
+}
+.header_brand_logo hr {
+  margin: 0;
+  width: 100px;
+  transition: width 0.3s ease; /* Add transition for a smoother effect */
+}
+
+.header_brand_logo p:hover + hr {
+  width: 10px;
+}
+.header_other_nav_cont {
+  display: flex;
+  align-items: center;
+}
+
+.header_other_nav_cont > p {
+  margin-right: 20px;
+  font-weight: lighter;
+  font-size: 30px;
+  font-family: Arial, Helvetica, sans-serif;
+  cursor: pointer;
+  border-bottom: 0;
+  transition: all 0.2s;
+}
+.header_other_nav_cont > p:hover {
+  border-bottom: 1px solid black;
+}
+
+.logout-button {
+  background: #b23b3b;
+  color: white;
+  font-family: inherit;
+  padding: 0.35em;
+  padding-left: 1.2em;
+  font-size: 17px;
+  font-weight: 500;
+  border-radius: 0.9em;
+  border: none;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  box-shadow: inset 0 0 1.6em -0.6em #672222;
+  overflow: hidden;
+  position: relative;
+  height: 2.8em;
+  padding-right: 3.3em;
+  cursor: pointer;
+  margin-left: 20px;
+}
+
+.logout-button .icon {
+  background: white;
+  margin-left: 1em;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.2em;
+  width: 2.2em;
+  border-radius: 0.7em;
+  box-shadow: 0.1em 0.1em 0.6em 0.2em #672222;
+  right: 0.3em;
+  transition: all 0.3s;
+}
+
+.logout-button:hover .icon {
+  width: calc(100% - 0.6em);
+}
+
+.logout-button .icon svg {
+  width: 1.1em;
+  transition: transform 0.3s;
+  color: #672222;
+}
+
+.logout-button:hover .icon svg {
+  transform: translateX(0.1em);
+}
+
+.logout-button:active .icon {
+  transform: scale(0.95);
+}

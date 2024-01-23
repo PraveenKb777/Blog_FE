@@ -131,6 +131,9 @@
 .view_blog_user_details {
   margin-left: 10px;
   cursor: default;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .view_blog_user_name {
   font-weight: bold;

@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { setError } from "../../redux/slice/errorSlice";
 import axiosInstance from "../../utils/auth";
 import "./login.css";
+import { setCurrentUser, setLogin } from "../../redux/slice/initialSlice";
 interface ILoginData {
   token: string;
   user: {
@@ -46,6 +47,8 @@ export default function Login() {
       const { data } = await res.data;
       const token = data?.token || "";
       localStorage.setItem("jwt", token);
+      dispatch(setCurrentUser(data?.user));
+      dispatch(setLogin(true));
       if (state?.redirect) {
         navigate(state.redirect, { replace: true });
       } else {
@@ -57,6 +60,13 @@ export default function Login() {
       setLoad(false);
     }
   };
+
+  useEffect(() => {
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      navigate("/", { replace: true });
+    }
+  }, [navigate]);
 
   return (
     <div className="login-main-cont">

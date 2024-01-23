@@ -9,6 +9,7 @@ import Home from "./src/pages/Home/Home";
 import Login from "./src/pages/Login/Login";
 import { setError } from "./src/redux/slice/errorSlice";
 import { RootState } from "./src/redux/store/store";
+import Header from "./src/pages/Header/Header";
 export default function App(): JSX.Element {
   const { errorMsg } = useSelector((e: RootState) => e.errorReducer);
   const dispatch = useDispatch();
@@ -33,6 +34,7 @@ export default function App(): JSX.Element {
   return (
     <>
       <BrowserRouter>
+        <Header />
         <Routes>
           <Route path="/login" element={<Login />} />
 
@@ -40,14 +42,8 @@ export default function App(): JSX.Element {
             path="/editor"
             element={<PrivateRoute path="/editor" element={<MainEditor />} />}
           />
-          <Route
-            path="/"
-            element={<PrivateRoute path="/" element={<Home />} />}
-          />
-          <Route
-            path="/blogs/:id"
-            element={<PrivateRoute element={<Blog />} />}
-          />
+          <Route path="/" element={<Home />} />
+          <Route path="/blogs/:id" element={<Blog />} />
         </Routes>
       </BrowserRouter>
       <ToastContainer />

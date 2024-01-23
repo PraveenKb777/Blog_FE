@@ -13,7 +13,6 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react",
-
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
@@ -21,6 +20,11 @@
     "noFallthroughCasesInSwitch": true,
     "esModuleInterop": true
   },
-  "include": ["EditorSrc", "src/assets/*"],
+  "include": [
+    "EditorSrc",
+    "src/assets/*",
+    "assets/svgs/*.svg",
+    "assets/**/*.tsx"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

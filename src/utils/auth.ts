@@ -14,7 +14,11 @@ axiosInstance.interceptors.request.use(
     return config;
   },
   (error: AxiosError) => {
-    return Promise.reject(error);
+    if (error.status === 401) {
+      localStorage.removeItem("jwt");
+      return;
+    }
+    return;
   }
 );
 export default axiosInstance;

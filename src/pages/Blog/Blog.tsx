@@ -1,20 +1,20 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import comment from "../../assets/svgs/comment.svg";
+import commentSvg from "../../assets/svgs/comment.svg";
 import Comments, { IComment } from "../../components/Comments/Comments";
 import SendButton from "../../components/SendButton/SendButton";
 import UserDetails, { IUser } from "../../components/UserDetails/UserDetails";
 import axiosInstance from "../../utils/auth";
 import "./blog.css";
 
-interface IBlog {
+export interface IBlog {
   _id: string;
   title: string;
   content: string;
   readtime: number;
   author: IUser;
   hashtags: [];
-  images: string[];
+  blogImages: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -26,6 +26,7 @@ export default function Blog() {
   const [toggleComment, setToggleComment] = useState(false);
   const [addComment, setAddComment] = useState("");
   const [addCommentLoading, setAddCommentLoading] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
   const getAllComments = useCallback(async () => {
     try {
       const res = await axiosInstance.get(`comment/${id}`);
@@ -35,6 +36,22 @@ export default function Blog() {
       console.log(error);
     }
   }, [id]);
+
+  const verifyUser = useCallback(async () => {
+    try {
+      const res = await axiosInstance.get("/user");
+      await res.data;
+
+      setLoggedIn(true);
+    } catch (error) {
+      console.warn("Not Logged in");
+      setLoggedIn(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    verifyUser();
+  }, [verifyUser]);
 
   useEffect(() => {
     if (toggleComment) getAllComments();
@@ -97,62 +114,83 @@ export default function Blog() {
   }, [blog?.title]);
 
   return (
-    <main className="view_blog_main_cont">
-      <div
-        className={`comment-right-menu ${
-          !toggleComment ? "hiddenComment" : ""
-        }`}
-      >
-        <div className="post_comment_main">
-          <p
-            style={{
-              marginBottom: "10px",
-              cursor: "pointer",
-              alignSelf: "flex-end",
-            }}
-            onClick={() => setToggleComment(false)}
-          >
-            X
-          </p>
-          <textarea
-            value={addComment}
-            onChange={(e) => setAddComment(e.target.value)}
-            placeholder="Write your thoughts..."
-            maxLength={250}
-            className={`post_comment_input ${addComment.length && "isHeight"}`}
-          />
-          <SendButton
-            label="Post"
-            onClick={postComment}
-            isLoading={addCommentLoading}
-            addOnClass={!addComment ? "post_comment_btn" : ""}
-          />
-          <hr />
-        </div>
-        {commentList.map((e) => (
-          <Comments data={e} key={e._id} remove={removeBlogFromState} />
-        ))}
-      </div>
-      <div className="view_blog_maindiv">
-        <h1>{blog?.title}</h1>
-        <hr className="view_blog_hr_line" />
-        <div className="view_blog_expressions">
-          <div
-            onClick={() => setToggleComment((e) => !e)}
-            className="view_blog_comment"
-          >
-            <img className="expression_comment" src={comment} />
-            <span>{totalComments}</span>
-          </div>
-        </div>
-        <hr className="view_blog_hr_line" />
-        <UserDetails author={blog?.author} createdAt={blog?.createdAt} />
-
+    <>
+      <main className="view_blog_main_cont">
         <div
-          className="blog_view_tag"
-          dangerouslySetInnerHTML={{ __html: blog?.content || "" }}
-        ></div>
-      </div>
-    </main>
+          className={`comment-right-menu ${
+            !toggleComment ? "hiddenComment" : ""
+          }`}
+        >
+          <div className="post_comment_main">
+            <p
+              style={{
+                marginBottom: "10px",
+                cursor: "pointer",
+                alignSelf: "flex-end",
+              }}
+              onClick={() => setToggleComment(false)}
+            >
+              X
+            </p>
+            {loggedIn ? (
+              <>
+                <textarea
+                  value={addComment}
+                  onChange={(e) => setAddComment(e.target.value)}
+                  placeholder="Write your thoughts..."
+                  maxLength={250}
+                  className={`post_comment_input ${
+                    addComment.length && "isHeight"
+                  }`}
+                />
+                <SendButton
+                  label="Post"
+                  onClick={postComment}
+                  isLoading={addCommentLoading}
+                  addOnClass={!addComment ? "post_comment_btn" : ""}
+                />
+              </>
+            ) : (
+              <p>Login to post a comment</p>
+            )}
+            <hr />
+          </div>
+          {commentList.map((e) => (
+            <Comments
+              data={e}
+              key={e._id}
+              remove={removeBlogFromState}
+              isLoggedIn={loggedIn}
+            />
+          ))}
+        </div>
+        <div className="view_blog_maindiv">
+          <h1>{blog?.title}</h1>
+          <hr className="view_blog_hr_line" />
+          <div className="view_blog_expressions">
+            <div
+              onClick={() => setToggleComment((e) => !e)}
+              className="view_blog_comment"
+            >
+              <img className="expression_comment" src={commentSvg} />
+              <span>{totalComments}</span>
+            </div>
+            {blog?.readtime && (
+              <div className="view_blog_comment">
+                <span>Estimate Read Time : {"  "}</span>
+                <span> {blog?.readtime} mins</span>
+              </div>
+            )}
+          </div>
+          <hr className="view_blog_hr_line" />
+          <UserDetails author={blog?.author} createdAt={blog?.createdAt} />
+
+          <div
+            className="blog_view_tag"
+            dangerouslySetInnerHTML={{ __html: blog?.content || "" }}
+          ></div>
+        </div>
+      </main>
+    </>
   );
 }

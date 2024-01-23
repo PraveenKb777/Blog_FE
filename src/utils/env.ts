@@ -1,5 +1,5 @@
 const ENV = {
-  baseUrl: "http://192.168.1.26:3000",
+  baseUrl: "https://praveen-blogs-be.onrender.com",
 };
 
 export default ENV;
