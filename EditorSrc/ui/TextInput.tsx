@@ -1,3 +1,4 @@
+import React from "react";
 import "./Input.css";
 
 import { HTMLInputTypeAttribute } from "react";

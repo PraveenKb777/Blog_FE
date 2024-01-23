@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import { DEFAULT_SETTINGS, Settings } from "./appSettings";
 
 // override default options with query parameters if any

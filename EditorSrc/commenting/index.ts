@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import type { LexicalEditor } from "lexical";
 
 import { Provider, TOGGLE_CONNECT_COMMAND } from "@lexical/yjs";

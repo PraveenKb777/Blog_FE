@@ -12,7 +12,6 @@ import { ChangeEvent, KeyboardEvent, useEffect, useState } from "react";
 import { useSharedHistoryContext } from "./context/SharedHistoryContext";
 import AutoEmbedPlugin from "./plugins/AutoEmbedPlugin";
 import AutoLinkPlugin from "./plugins/AutoLinkPlugin";
-import CodeActionMenuPlugin from "./plugins/CodeActionMenuPlugin";
 import CodeHighlightPlugin from "./plugins/CodeHighlightPlugin";
 import ComponentPickerPlugin from "./plugins/ComponentPickerPlugin";
 import DragDropPaste from "./plugins/DragDropPastePlugin";
@@ -26,8 +25,6 @@ import InlineImagePlugin from "./plugins/InlineImagePlugin";
 import KeywordsPlugin from "./plugins/KeywordsPlugin";
 import LinkPlugin from "./plugins/LinkPlugin";
 import ListMaxIndentLevelPlugin from "./plugins/ListMaxIndentLevelPlugin";
-import { MaxLengthPlugin } from "./plugins/MaxLengthPlugin";
-import PollPlugin from "./plugins/PollPlugin";
 import SpeechToTextPlugin from "./plugins/SpeechToTextPlugin";
 import TabFocusPlugin from "./plugins/TabFocusPlugin";
 import { CAN_USE_DOM } from "./shared/src/canUseDOM";
@@ -43,7 +40,6 @@ import ContentEditable from "./ui/ContentEditable";
 import { useDispatch, useSelector } from "react-redux";
 import { setTitle } from "../src/redux/slice/publishSlice";
 import { RootState } from "../src/redux/store/store";
-import AutocompletePlugin from "./plugins/AutocompletePlugin";
 
 export default function Editor(): JSX.Element {
   const dispatch = useDispatch();

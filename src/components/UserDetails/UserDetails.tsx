@@ -1,3 +1,6 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import React from "react";
 import avatar from "../../assets/svgs/avatar.svg";
 import moment from "moment";

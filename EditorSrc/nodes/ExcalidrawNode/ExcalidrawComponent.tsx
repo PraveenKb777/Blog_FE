@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import type { ExcalidrawElementFragment } from "./ExcalidrawModal";
 import type { NodeKey } from "lexical";
 

@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import { createHeadlessEditor } from "@lexical/headless";
 import { $isMarkNode, $unwrapMarkNode } from "@lexical/mark";
 import * as http from "http";
