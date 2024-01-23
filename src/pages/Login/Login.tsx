@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { setError } from "../../redux/slice/errorSlice";
 import axiosInstance from "../../utils/auth";
 import "./login.css";
@@ -73,7 +73,7 @@ export default function Login() {
       <form className="login-centered-div ">
         <h2>Sign in with email</h2>
         <p>Kindly enter the email and password associated with your Account</p>
-        <label htmlFor={"email"}>Your Email</label>
+        <label htmlFor={"email"}>Your User name</label>
         <input
           aria-label="Email"
           name="email"
@@ -101,6 +101,14 @@ export default function Login() {
             "Login"
           )}
         </button>
+        <Link
+          to="/signup"
+          className="login_sign_up_bottom_text"
+          replace
+          state={{ redirect: state?.redirect ? state.redirect : "/" }}
+        >
+          Don't have an account? Sign up here!
+        </Link>
       </form>
     </div>
   );

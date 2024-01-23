@@ -10,6 +10,7 @@ import Login from "./src/pages/Login/Login";
 import { setError } from "./src/redux/slice/errorSlice";
 import { RootState } from "./src/redux/store/store";
 import Header from "./src/pages/Header/Header";
+import SignUp from "./src/pages/SignUp/SignUp";
 export default function App(): JSX.Element {
   const { errorMsg } = useSelector((e: RootState) => e.errorReducer);
   const dispatch = useDispatch();
@@ -37,6 +38,7 @@ export default function App(): JSX.Element {
         <Header />
         <Routes>
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
 
           <Route
             path="/editor"
