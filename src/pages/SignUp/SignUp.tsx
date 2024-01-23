@@ -1,4 +1,4 @@
-import React, { FormEvent, useCallback, useState } from "react";
+import React, { FormEvent, useCallback, useEffect, useState } from "react";
 import "./signup.css";
 import { useDispatch } from "react-redux";
 import { setError } from "../../redux/slice/errorSlice";
@@ -22,6 +22,9 @@ export default function SignUp() {
   const dispatch = useDispatch();
   const { state } = useLocation();
   const navigation = useNavigate();
+  useEffect(() => {
+    document.title = "Blog Sign up";
+  }, []);
   const signUp = useCallback(
     async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();

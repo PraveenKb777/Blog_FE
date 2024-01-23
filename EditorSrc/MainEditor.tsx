@@ -6,7 +6,7 @@ import Editor from "./Editor";
 import PlaygroundNodes from "./nodes/PlaygroundNodes";
 import { TableContext } from "./plugins/TablePlugin";
 import PlaygroundEditorTheme from "./themes/PlaygroundEditorTheme";
-import React from "react";
+import React, { useEffect } from "react";
 import "./index.css";
 // function prepopulatedRichText() {
 //   const root = $getRoot();
@@ -98,6 +98,11 @@ function MainEditor(): JSX.Element {
     },
     theme: PlaygroundEditorTheme,
   };
+
+  useEffect(() => {
+    // change title tag
+    document.title = "Blog Editor";
+  }, []);
 
   return (
     <div id="editorRoot">
