@@ -54,7 +54,7 @@
 }
 
 .logout-button {
-  background: #b23b3b;
+  background: #ff6242;
   color: white;
   font-family: inherit;
   padding: 0.35em;
@@ -66,7 +66,7 @@
   letter-spacing: 0.05em;
   display: flex;
   align-items: center;
-  box-shadow: inset 0 0 1.6em -0.6em #672222;
+  box-shadow: inset 0 0 1.6em -0.6em #ff6242;
   overflow: hidden;
   position: relative;
   height: 2.8em;
@@ -85,7 +85,7 @@
   height: 2.2em;
   width: 2.2em;
   border-radius: 0.7em;
-  box-shadow: 0.1em 0.1em 0.6em 0.2em #672222;
+  box-shadow: 0.1em 0.1em 0.6em 0.2em #ff6242;
   right: 0.3em;
   transition: all 0.3s;
 }
@@ -97,7 +97,7 @@
 .logout-button .icon svg {
   width: 1.1em;
   transition: transform 0.3s;
-  color: #672222;
+  color: #ff6242;
 }
 
 .logout-button:hover .icon svg {

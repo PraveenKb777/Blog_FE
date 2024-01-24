@@ -63,6 +63,7 @@ export default function Login() {
 
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
+    document.title = "Blog Login";
     if (jwt) {
       navigate("/", { replace: true });
     }

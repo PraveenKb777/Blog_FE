@@ -1,0 +1,71 @@
+.footer_main_cont {
+  position: relative;
+  background-color: black;
+  width: 100%;
+  padding: 20px;
+  color: #fff;
+}
+.footer_logo {
+  display: inline-block;
+  fill: #fff;
+  width: 20px;
+  aspect-ratio: 1;
+}
+
+.footer_icon_cont {
+  display: block;
+  position: relative;
+  padding: 10px;
+  width: max-content;
+  color: #fff;
+  text-align: center;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+}
+
+.footer_icon_cont:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.4);
+  -webkit-transition: none;
+  -moz-transition: none;
+  transition: none;
+}
+.footer_icon_cont:hover:after {
+  width: 120%;
+  background-color: rgba(255, 255, 255, 0);
+
+  -webkit-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+.footer_upper_part {
+  display: flex;
+  justify-content: center;
+}
+.footer_sub_cont {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer_icon_cont {
+}
+.footer_review_text {
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.footer_review_text:hover {
+  color: gray;
+}
+.footer_main_cont > hr::after {
+  height: 0.5px;
+  background: #767;
+}

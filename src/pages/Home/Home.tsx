@@ -85,6 +85,7 @@ export default function Home() {
   }, [pageNo]);
 
   useEffect(() => {
+    document.title = "Blogs @ PKBMG";
     getBlogList();
   }, [getBlogList]);
   return (

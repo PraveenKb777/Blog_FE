@@ -6,6 +6,7 @@ export interface IToastError {
 
 const initialState = {
   errorMsg: "",
+  isSuc: false,
 };
 
 const errorSlice = createSlice({
@@ -15,9 +16,12 @@ const errorSlice = createSlice({
     setError: (state, action) => {
       state.errorMsg = action.payload;
     },
+    setIsSuc: (state, action) => {
+      state.isSuc = action.payload;
+    },
   },
 });
 
 const errorReducer = errorSlice.reducer;
-export const { setError } = errorSlice.actions;
+export const { setError, setIsSuc } = errorSlice.actions;
 export default errorReducer;
