@@ -14,7 +14,9 @@ import SignUp from "./src/pages/SignUp/SignUp";
 import Footer from "./src/pages/Footer/Footer";
 import Reviews from "./src/pages/Reviews/Reviews";
 export default function App(): JSX.Element {
-  const { errorMsg, isSuc } = useSelector((e: RootState) => e.errorReducer);
+  const { errorMsg, isSuc, globalLoading } = useSelector(
+    (e: RootState) => e.errorReducer
+  );
   const dispatch = useDispatch();
   useEffect(() => {
     if (errorMsg && isSuc) {
@@ -67,6 +69,7 @@ export default function App(): JSX.Element {
         </Routes>
         <ToastContainer />
         <Footer />
+        {globalLoading && <div className="global_loading">Loading</div>}
       </BrowserRouter>
     </>
   );

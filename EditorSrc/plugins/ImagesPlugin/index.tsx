@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { $wrapNodeInElement, mergeRegister } from "@lexical/utils";
 import {
@@ -37,6 +38,7 @@ import TextInput from "../../ui/TextInput";
 import ENV from "../../../src/utils/env";
 import axios from "axios";
 import { useDispatch } from "react-redux";
+import { setImageList } from "../../../src/redux/slice/editorSlice";
 
 export type InsertImagePayload = Readonly<ImagePayload>;
 
@@ -125,7 +127,9 @@ export function InsertImageUploadedDialogBody({
         );
         const data = await response.data;
         setSrc(data.url);
+
         setUploading(false);
+        dispatch(setImageList(data.url));
       } catch (error) {
         console.log("image upload error", error);
       }
