@@ -92,6 +92,19 @@
   flex-direction: column;
 }
 
+@media screen and (max-width: 600px) {
+  .view_blog_maindiv {
+    max-width: 100vw;
+    padding: 20px;
+  }
+
+  .blog_view_tag
+    .PlaygroundEditorTheme__paragraph
+    .PlaygroundEditorTheme__embedBlock {
+    min-height: 10px;
+  }
+}
+
 .view_blog_main_cont h1 {
   align-self: flex-start;
 }

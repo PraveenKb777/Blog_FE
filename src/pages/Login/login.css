@@ -193,3 +193,31 @@
     transform: rotate(360deg);
   }
 }
+
+@media screen and (max-width: 600px) {
+  .login-main-cont {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .login-centered-div {
+    padding: 10px;
+    max-width: 95%;
+  }
+
+  .login-centered-div h2 {
+    margin: 5px;
+  }
+
+  .login-centered-div p {
+    margin: 5px 15px;
+  }
+
+  .login_input {
+    padding: 5px;
+    width: 60%;
+  }
+}
